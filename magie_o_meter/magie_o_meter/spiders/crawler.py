@@ -1,4 +1,5 @@
 import scrapy
+import sqlite3
 
 class QuotesSpider(scrapy.Spider):
     name = "magieValue"
@@ -13,3 +14,10 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         magie_o_meter_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[2]/div[3]/div/div/div/div[1]/span/text()').get()
         print(f'Magie-o-meter Wert: {magie_o_meter_value}')   
+
+def safe_in_db(value, date):
+    conn = sqlite3.connect('././magie.db')
+    c = conn.cursor()
+    c.execute('''INSERT INTO magie_values VALUES ('30.01.2020', '12', '49', '29')''')
+    conn.commit()
+    conn.close()
