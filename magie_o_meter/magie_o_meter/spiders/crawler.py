@@ -1,23 +1,47 @@
 import scrapy
-import sqlite3
+
+from magie_o_meter.db_config import inster_date_to_database
+
+""" This crawler didn't work at the moment, because there are new values... """
 
 class QuotesSpider(scrapy.Spider):
     name = "magieValue"
+    # date = datetime.date.today().strftime("%d-%m-%Y")
+
     start_urls = [
-        'https://tagesenergie.org/energie-des-tages/tagesenergie-am-30-01-2020/',
+
     ]
 
+    for i in range(1,13):
+        for j in range(1,32):
+            for k in range(2018,2020):
+                if i < 10:
+                    if j < 10:
+                        date = f"0{j}-0{i}-{k}"
+                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+                    else:
+                        date = f"{j}-0{i}-{k}"
+                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+                else:
+                    if j < 10:
+                        date = f"0{j}-{i}-{k}"
+                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+                    else:
+                        date = f"{j}-{i}-{k}"
+                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
 
-# CSS       html.wf-loading.Firefox.Firefox72.cssanimations.csstransitions.no-touchevents.js_active.vc_desktop.vc_transform body.post-template-default.single.single-post.postid-2936.single-format-standard.wpb-js-composer.js-comp-ver-5.5.2.vc_responsive div#mk-boxed-layout div#mk-theme-container div#theme-page.master-holder.blog-post-type-image.blog-style-compact.clearfix div.mk-main-wrapper-holder div#mk-page-id-2936.theme-page-wrapper.mk-main-wrapper.mk-grid.full-layout.false div.theme-content.false article#2936.mk-blog-single.post-2936.post.type-post.status-publish.format-standard.has-post-thumbnail.hentry.category-energie-des-tages.category-sonnenkraft.tag-energie-des-tages.tag-sonnenkraft div.mk-single-content.clearfix div.wpb_row.vc_row.vc_row-fluid.mk-fullwidth-false.attched-false.js-master-row.mk-grid.mk-in-viewport div.vc_col-sm-12.wpb_column.column_container._.height-full div.wpb_row.vc_inner.vc_row.vc_row-fluid.attched-false div.wpb_column.vc_column_container.vc_col-sm-4 div.vc_column-inner div.wpb_wrapper div#mk-chart-9.mk-chart.js-el div.mk-chart__chart.easyPieChart span.mk-chart__percent
-            # XPath     /html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[2]/div[3]/div/div/div/div[1]/span
-            # Scrapy    response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[2]/div[3]/div/div/div/div[1]/span/text()').get()
+
+
+    print(start_urls)
+
+
     def parse(self, response):
         magie_o_meter_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[2]/div[3]/div/div/div/div[1]/span/text()').get()
-        print(f'Magie-o-meter Wert: {magie_o_meter_value}')   
+        impuls_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[4]/div[3]/div/div/div/div[1]/span/text()').get()
+        bw_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[6]/div[3]/div/div/div/div[1]/span/text()').get()
+        print(f"\n\n\n\n\n\n\nIch bin eindeutiger Text : {magie_o_meter_value}, {impuls_value} {bw_value}")
+        #inster_date_to_database(self.date, magie_o_meter_value, impuls_value, bw_value)
 
-def safe_in_db(value, date):
-    conn = sqlite3.connect('././magie.db')
-    c = conn.cursor()
-    c.execute('''INSERT INTO magie_values VALUES ('30.01.2020', '12', '49', '29')''')
-    conn.commit()
-    conn.close()
+
+
+

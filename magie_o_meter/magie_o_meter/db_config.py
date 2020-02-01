@@ -34,6 +34,3 @@ def __execute_command(command):
             connection.close()
             print("PostgreSQL connection is closed")
 
-
-if __name__ == "__main__":
-    inster_date_to_database('2020-01-01', 12, 13, 14)
