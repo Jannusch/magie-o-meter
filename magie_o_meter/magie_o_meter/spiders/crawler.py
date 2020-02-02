@@ -1,46 +1,39 @@
-import scrapy
+import datetime
 
+import scrapy
+from scrapy.linkextractors import LinkExtractor
+from scrapy.http import Request, HtmlResponse
 from magie_o_meter.db_config import inster_date_to_database
+
 
 """ This crawler didn't work at the moment, because there are new values... """
 
-class QuotesSpider(scrapy.Spider):
+
+class MagieSpider(scrapy.Spider):
     name = "magieValue"
     # date = datetime.date.today().strftime("%d-%m-%Y")
 
-    start_urls = [
+    def __init__(self, **kw):
+        super(MagieSpider, self).__init__(**kw)
+        url = kw.get('url') or kw.get('domain')
+        self.date = kw.get('date')
+        self.url = url
+        self.link_extractor = LinkExtractor()
 
-    ]
+    def start_requests(self):
+        return[Request(self.url, callback=self.parse, dont_filter=True)]
 
-    for i in range(1,13):
-        for j in range(1,32):
-            for k in range(2018,2020):
-                if i < 10:
-                    if j < 10:
-                        date = f"0{j}-0{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                    else:
-                        date = f"{j}-0{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                else:
-                    if j < 10:
-                        date = f"0{j}-{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                    else:
-                        date = f"{j}-{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-
-
-
-    print(start_urls)
-
+    def get_values(self):
+        return (self.magie_o_meter_value, self.impuls_value, self.bw_value)
 
     def parse(self, response):
-        magie_o_meter_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[2]/div[3]/div/div/div/div[1]/span/text()').get()
-        impuls_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[4]/div[3]/div/div/div/div[1]/span/text()').get()
-        bw_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[6]/div[3]/div/div/div/div[1]/span/text()').get()
-        print(f"\n\n\n\n\n\n\nIch bin eindeutiger Text : {magie_o_meter_value}, {impuls_value} {bw_value}")
-        #inster_date_to_database(self.date, magie_o_meter_value, impuls_value, bw_value)
+        self.magie_o_meter_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[2]/div[3]/div/div/div/div[1]/span/text()').get()
+        self.impuls_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[4]/div[3]/div/div/div/div[1]/span/text()').get()
+        self.bw_value = response.xpath('/html/body/div[2]/div/div[1]/div[2]/div/div[1]/article/div[3]/div[2]/div/div[6]/div[3]/div/div/div/div[1]/span/text()').get()
+        inster_date_to_database(self.date, self.magie_o_meter_value, self.impuls_value, self.bw_value)
+        print(self.magie_o_meter_value, self.impuls_value, self.bw_value)
+
+        """print(f"\n\n\n\n\n\n\nIch bin eindeutiger Text : {magie_o_meter_value}, {impuls_value} {bw_value}")"""
 
 
 
