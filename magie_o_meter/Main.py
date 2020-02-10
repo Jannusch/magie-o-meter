@@ -11,7 +11,7 @@ from scrapy.crawler import CrawlerProcess
 
 # TODO After crawling all values, select every 0 value from db and start search again only with this dates
 # TODO automate restart after banning: push to git and with restart load and change start values in start_urls
-# TODO 18.06 last value after switch to server
+# TODO 18.06 last value after switch to server / 19.06 / 26.10
 
 
 def main():
@@ -34,7 +34,7 @@ def main():
                         date = f"{j}-{i}-{k}"
                         start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
 
-    start_urls = start_urls[141:]
+    start_urls = start_urls[301:]
 
     # start_urls = ["https://www.pythoncentral.io/pythons-time-sleep-pause-wait-sleep-stop-your-code/"]
 
