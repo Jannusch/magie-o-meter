@@ -3,70 +3,51 @@ import urllib.request
 import urllib.error
 import sys
 from random import random, randrange
+import datetime
 
 from magie_o_meter.XMLParser import get_values_from_html
 from magie_o_meter.db_config import inster_date_to_database
-from scrapy.crawler import CrawlerProcess
-
-
-# TODO After crawling all values, select every 0 value from db and start search again only with this dates
-# TODO automate restart after banning: push to git and with restart load and change start values in start_urls
-# TODO 18.06 last value after switch to server / 19.06 / 26.10
 
 
 def main():
-    start_urls = []
-    for k in range(2018, 2020):
-        for i in range(1, 13):
-            for j in range(1, 32):
-                if i < 10:
-                    if j < 10:
-                        date = f"0{j}-0{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                    else:
-                        date = f"{j}-0{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                else:
-                    if j < 10:
-                        date = f"0{j}-{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                    else:
-                        date = f"{j}-{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+    date = datetime.datetime.now().date()
+    day = date.day
+    month = date.month
+    year = date.year
 
-    start_urls = start_urls[301:]
+    if month < 10:
+        month = f'0{month}'
 
-    # start_urls = ["https://www.pythoncentral.io/pythons-time-sleep-pause-wait-sleep-stop-your-code/"]
+    if day < 10:
+        day = f'0{day}'
 
-    for url in start_urls:
-        date = ''
-        for i in range(59, 69):
-            # pass
-            date = date + url[i]
-        sleep_time = randrange(5, 100)
-        time.sleep(sleep_time)
-        try:
-            html = request_data(url)
-        except urllib.error.HTTPError as e:
-            if e.code == 403:
-                f = open('last_request.txt', 'w')
-                f.write(url)
-                f.close()
-                sys.exit()
-            print(e)
-            html = ""
-        except Exception as e:
-            print(f"Error scraping {e}")
-            html = ""
+    url = f'https://tagesenergie.org/energie-des-tages/energie-des-tages-tagesenergie-am-{day}-{month}-{year}/'
+    date = f'{year}-{month}-{day}'
 
-        # html = open('website.html', "r")
-        values = get_values_from_html(html)
+    sleep_time = randrange(5, 100)
+    time.sleep(sleep_time)
+    try:
+        html = request_data(url)
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            f = open('last_request.txt', 'w')
+            f.write(url)
+            f.close()
+            sys.exit()
+        print(e)
+        html = ""
+    except Exception as e:
+        print(f"Error scraping {e}")
+        html = ""
 
-        try:
-            inster_date_to_database(date, values[0], values[1], values[2])
-        except:
-            print("Insert Error")
-            inster_date_to_database(date, 0, 0, 0)
+    # html = open('website.html', "r")
+    values = get_values_from_html(html)
+
+    try:
+        inster_date_to_database(date, values[0], values[1], values[2])
+    except:
+        print("Insert Error")
+        inster_date_to_database(date, 0, 0, 0)
 
 
 def request_data(url):
