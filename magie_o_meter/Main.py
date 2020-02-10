@@ -5,8 +5,8 @@ import sys
 from random import random, randrange
 import datetime
 
-from magie_o_meter.XMLParser import get_values_from_html
-from magie_o_meter.db_config import inster_date_to_database
+from XMLParser import get_values_from_html
+from db_config import inster_date_to_database
 
 
 def main():
