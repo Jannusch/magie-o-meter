@@ -40,22 +40,19 @@ def main():
         print(f"Error scraping {e}")
         html = ""
 
-    # html = open('website.html', "r")
     values = get_values_from_html(html)
 
     try:
-        inster_date_to_database(date, values[0], values[1], values[2])
+        insert_date_to_database(date, values[0], values[1], values[2])
     except:
         print("Insert Error")
         inster_date_to_database(date, 0, 0, 0)
 
 
 def request_data(url):
-    headers = {}
-    headers['User-Agent'] = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:48.0) Gecko/20100101 Firefox/48.0"
+    headers = {'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:48.0) Gecko/20100101 Firefox/48.0"}
     req = urllib.request.Request(url, headers=headers)
     html = urllib.request.urlopen(req).read()
-    # print(html)
     return html
 
 

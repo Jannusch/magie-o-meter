@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
+
 def get_values_from_html(html):
-    # website = open('website.html', "r")
     try:
         soup = BeautifulSoup(html, 'html.parser')
         values = soup.find_all(class_='mk-chart__percent')

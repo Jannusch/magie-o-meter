@@ -1,6 +1,7 @@
 import psycopg2
 
-def inster_date_to_database(date_value, magie_value, impuls_value, bw_value):
+
+def insert_date_to_database(date_value, magie_value, impuls_value, bw_value):
     command = f"INSERT INTO values(date, magie, impuls, bw) VALUES (DATE '{date_value}', {magie_value}, {impuls_value}, {bw_value});"
     __execute_command(command)
 
@@ -27,6 +28,7 @@ def __execute_command(command):
 
     except (Exception, psycopg2.Error) as error:
         print(f"Error while connecting to PostgreSQL {error}")
+        return 'Douh'
     finally:
         # closing database connection
         if(connection):
