@@ -2,39 +2,39 @@ import time
 import urllib.request
 import urllib.error
 import sys
+import datetime
 from random import random, randrange
 
-from magie_o_meter.XMLParser import get_values_from_html
-from magie_o_meter.db_config import inster_date_to_database
+from XMLParser import get_values_from_html
+from db_config import inster_date_to_database
+from db_config import get_all_values
 from scrapy.crawler import CrawlerProcess
 
 
 # TODO After crawling all values, select every 0 value from db and start search again only with this dates
-# TODO automate restart after banning: push to git and with restart load and change start values in start_urls
-# TODO 18.06 last value after switch to server / 19.06 / 26.10
 
 
 def main():
     start_urls = []
-    for k in range(2018, 2020):
-        for i in range(1, 13):
-            for j in range(1, 32):
-                if i < 10:
-                    if j < 10:
-                        date = f"0{j}-0{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                    else:
-                        date = f"{j}-0{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+    k = 2019
+    for i in range(12, 13):
+        for j in range(7, 32):
+            if i < 10:
+                if j < 10:
+                    date = f"0{j}-0{i}-{k}"
+                    start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
                 else:
-                    if j < 10:
-                        date = f"0{j}-{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
-                    else:
-                        date = f"{j}-{i}-{k}"
-                        start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+                    date = f"{j}-0{i}-{k}"
+                    start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+            else:
+                if j < 10:
+                    date = f"0{j}-{i}-{k}"
+                    start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
+                else:
+                    date = f"{j}-{i}-{k}"
+                    start_urls.append(f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{date}/')
 
-    start_urls = start_urls[301:]
+
 
     # start_urls = ["https://www.pythoncentral.io/pythons-time-sleep-pause-wait-sleep-stop-your-code/"]
 
@@ -76,6 +76,7 @@ def request_data(url):
     html = urllib.request.urlopen(req).read()
     # print(html)
     return html
+
 
 
 if __name__ == "__main__":

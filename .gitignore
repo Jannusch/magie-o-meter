@@ -212,4 +212,4 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/linux,python,pycharm
 
-/dump.sql
+/dump_local.sql

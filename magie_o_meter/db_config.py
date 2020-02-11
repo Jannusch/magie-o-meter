@@ -1,8 +1,14 @@
 import psycopg2
 
+
 def inster_date_to_database(date_value, magie_value, impuls_value, bw_value):
     command = f"INSERT INTO values(date, magie, impuls, bw) VALUES (DATE '{date_value}', {magie_value}, {impuls_value}, {bw_value});"
     __execute_command(command)
+
+
+def get_all_values():
+    command = f'SELECT date FROM values;'
+    return __execute_command(command)
 
 
 def __execute_command(command):
@@ -18,8 +24,9 @@ def __execute_command(command):
 
         cursor.execute(command)
         try:
-            record = cursor.fetchone()
+            record = cursor.fetchall()
             print(f"You are connected to - {record} \n")
+            return record
         except (Exception, psycopg2.Error) as error:
             print(f"Error while writing to PostgreSQL {error}")
         finally:
