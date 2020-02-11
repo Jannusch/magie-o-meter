@@ -21,7 +21,7 @@ def main():
     if day < 10:
         day = f'0{day}'
 
-    url = f'https://tagesenergie.org/energie-des-tages/energie-des-tages-tagesenergie-am-{day}-{month}-{year}/'
+    url = f'https://tagesenergie.org/energie-des-tages/tagesenergie-am-{day}-{month}-{year}/'
     date = f'{year}-{month}-{day}'
 
     sleep_time = randrange(5, 100)
@@ -61,3 +61,4 @@ def request_data(url):
 
 if __name__ == "__main__":
     main()
+

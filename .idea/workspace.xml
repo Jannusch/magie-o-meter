@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c01081c-7a58-40c8-9807-428f12265cad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/daily_starter.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/magie_o_meter/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/magie_o_meter/Main.py" afterDir="false" />
     </list>
@@ -194,6 +193,8 @@
       <workItem from="1581284477157" duration="10419000" />
       <workItem from="1581323422757" duration="4257000" />
       <workItem from="1581369620590" duration="5162000" />
+      <workItem from="1581461366105" duration="412000" />
+      <workItem from="1581461934415" duration="608000" />
     </task>
     <servers />
   </component>
@@ -238,16 +239,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/magie_o_meter/Main.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/magie_o_meter/Main.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/magie_o_meter/Main.py</url>
           <line>34</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
@@ -255,6 +246,16 @@
           <url>file://$PROJECT_DIR$/magie_o_meter/Main.py</url>
           <line>23</line>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/magie_o_meter/Main.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/magie_o_meter/Main.py</url>
+          <line>39</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -267,7 +268,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/magie_o_meter$Main.coverage" NAME="Main Coverage Results" MODIFIED="1581375507862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/magie_o_meter" />
+    <SUITE FILE_PATH="coverage/magie_o_meter$Main.coverage" NAME="Main Coverage Results" MODIFIED="1581462480210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/magie_o_meter" />
     <SUITE FILE_PATH="coverage/magie_o_meter$XMLParser.coverage" NAME="XMLParser Coverage Results" MODIFIED="1581195714365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/magie_o_meter" />
   </component>
 </project>
