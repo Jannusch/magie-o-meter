@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c01081c-7a58-40c8-9807-428f12265cad" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/magie_o_meter/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/magie_o_meter/Main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -194,7 +194,8 @@
       <workItem from="1581323422757" duration="4257000" />
       <workItem from="1581369620590" duration="5162000" />
       <workItem from="1581461366105" duration="412000" />
-      <workItem from="1581461934415" duration="608000" />
+      <workItem from="1581461934415" duration="875000" />
+      <workItem from="1581463008224" duration="23000" />
     </task>
     <servers />
   </component>
